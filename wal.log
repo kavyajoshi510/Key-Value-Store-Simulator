@@ -1,0 +1,22 @@
+{"op": "put", "key": "1", "value": "5", "version": 1, "timestamp": 1752530416.8728251, "expiry": 1752530426.8728251}
+{"op": "put", "key": "1", "value": "5", "version": 2, "timestamp": 1752530479.387427, "expiry": 1752530489.387427}
+{"op": "put", "key": "6", "value": "9", "version": 1, "timestamp": 1752530491.4073951, "expiry": 1752530501.4073951}
+{"op": "put", "key": "3", "value": "9", "version": 1, "timestamp": 1752530522.932933, "expiry": 1752530532.932933}
+{"op": "delete", "key": "3"}
+{"op": "put", "key": "3", "value": "5", "version": 1, "timestamp": 1752530699.421303, "expiry": null}
+{"op": "put", "key": "1", "value": "8", "version": 3, "timestamp": 1752530711.692304, "expiry": null}
+{"op": "delete", "key": "3"}
+{"op": "put", "key": "3", "value": "5", "version": 1, "timestamp": 1752531020.2756171, "expiry": 1752531030.2756171}
+{"op": "put", "key": "3", "value": "5", "version": 2, "timestamp": 1752531129.270658, "expiry": 1752531139.270658}
+{"op": "put", "key": "3", "value": "5", "version": 3, "timestamp": 1752531181.954169, "expiry": 1752531191.954169}
+{"op": "put", "key": "9", "value": "8", "version": 1, "timestamp": 1752531206.468328, "expiry": 1752531216.468328}
+{"op": "put", "key": "9", "value": "6", "version": 2, "timestamp": 1752531220.704709, "expiry": 1752531230.704709}
+{"op": "put", "key": "3", "value": "5", "version": 4, "timestamp": 1752531380.010298, "expiry": 1752531390.010298}
+{"op": "put", "key": "3", "value": "5", "version": 5, "timestamp": 1752531436.196357, "expiry": 1752531446.196357}
+{"op": "put", "key": "3", "value": "5", "version": 6, "timestamp": 1752531438.6120949, "expiry": 1752531448.6120949}
+{"op": "put", "key": "3", "value": "5", "version": 7, "timestamp": 1752531513.843387, "expiry": 1752531523.843387}
+{"op": "put", "key": "7", "value": "3", "version": 1, "timestamp": 1752531528.232207, "expiry": 1752531538.232207}
+{"op": "put", "key": "7", "value": "3", "version": 2, "timestamp": 1752531535.8673851, "expiry": null}
+{"op": "put", "key": "5", "value": "6", "version": 1, "timestamp": 1752531544.418891, "expiry": null}
+{"op": "delete", "key": "1"}
+{"op": "put", "key": "3", "value": "6", "version": 8, "timestamp": 1752531625.1835551, "expiry": 1752531635.1835551}
