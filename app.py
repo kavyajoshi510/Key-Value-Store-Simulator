@@ -4,17 +4,39 @@ from key_value_store import KeyValueStore
 
 st.title("Key-Value Store Simulator")
 
+# Sidebar option to choose consistency
+consistency_mode = st.sidebar.selectbox("Choose Consistency", ["Strong", "Eventual"])
+
+# Slider for eventual consistency delay
+if consistency_mode == "eventual":
+    delay_seconds = st.sidebar.slider("Eventual Consistency Delay (seconds)", min_value=0, max_value=5, value=1)
+else:
+    delay_seconds = 0  # No delay for strong consistency
+
+# Checkbox to enable or disable TTL
 useTTL = st.checkbox("Enable TTL (10 seconds)", value=True)
 
-# Create or reset store if TTL setting changes
-if 'kvStore' not in st.session_state or st.session_state['ttlEnabled'] != useTTL:
+# Initialize session state if not already set
+if 'consistency' not in st.session_state:
+    st.session_state['consistency'] = "strong"
+if 'delay_seconds' not in st.session_state:
+    st.session_state['delay_seconds'] = 0
+
+# Create or reset store if consistency, TTL, or delay changes
+if ('kvStore' not in st.session_state 
+    or st.session_state['ttlEnabled'] != useTTL 
+    or st.session_state['consistency'] != consistency_mode
+    or st.session_state['delay_seconds'] != delay_seconds):
+
     ttlValue = 10 if useTTL else None
-    st.session_state['kvStore'] = KeyValueStore(consistency='strong', ttl=ttlValue)
+    st.session_state['kvStore'] = KeyValueStore(consistency=consistency_mode, ttl=ttlValue, delay_seconds=delay_seconds)
     st.session_state['ttlEnabled'] = useTTL
+    st.session_state['consistency'] = consistency_mode
+    st.session_state['delay_seconds'] = delay_seconds
 
 kvStore = st.session_state['kvStore']
 
-# --- Put section ---
+#Put section 
 st.header("Add or Update a Key")
 with st.form("put_form"):
     putKey = st.text_input("Key (Put)")
@@ -27,7 +49,7 @@ with st.form("put_form"):
         else:
             st.warning("Please enter both key and value.")
 
-# --- Get section ---
+#Get section 
 st.header("Get a Value")
 with st.form("get_form"):
     getKey = st.text_input("Key (Get)")
@@ -42,7 +64,7 @@ with st.form("get_form"):
         else:
             st.warning("Please enter a key.")
 
-# --- Delete section ---
+#Delete section
 st.header("Delete a Key")
 with st.form("delete_form"):
     delKey = st.text_input("Key (Delete)")
@@ -54,7 +76,7 @@ with st.form("delete_form"):
         else:
             st.warning("Please enter a key.")
 
-# --- Store display ---
+#Store display 
 st.header("Current Store")
 
 storeTable = []
@@ -73,3 +95,4 @@ if storeTable:
     st.table(storeTable)
 else:
     st.write("Store is empty or keys expired.")
+
