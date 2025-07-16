@@ -3,12 +3,11 @@ import time
 import threading
 
 class KeyValueStore:
-    def __init__(self, consistency='strong', ttl=None):
-        # You can set strong or eventual consistency
-        # ttl means keys expire after given seconds (optional)
+    def __init__(self, consistency='strong', ttl=None, delay_seconds=0.5):
         self.store = {}
         self.consistency = consistency
         self.ttl = ttl
+        self.delay_seconds = delay_seconds
         self.lock = threading.Lock()
         self.walFile = 'wal.log'
 
@@ -28,7 +27,6 @@ class KeyValueStore:
                 'expiry': expiry
             }
 
-            # Save to WAL (write-ahead log)
             with open(self.walFile, 'a') as f:
                 logEntry = json.dumps({
                     'op': 'put',
@@ -47,14 +45,13 @@ class KeyValueStore:
             if key not in self.store:
                 return None
 
-            # Remove if expired
             if self.store[key]['expiry'] and time.time() > self.store[key]['expiry']:
                 del self.store[key]
                 self.saveToDisk()
                 return None
 
             if self.consistency == 'eventual':
-                time.sleep(0.5)  # simulate delay for eventual consistency
+                time.sleep(self.delay_seconds)  
 
             return self.store[key]['value']
 
@@ -68,7 +65,6 @@ class KeyValueStore:
                 self.saveToDisk()
 
     def resolveConflict(self, key, newValue, newVersion, newTimestamp):
-        # Last write wins
         if key not in self.store:
             self.store[key] = {
                 'value': newValue,
@@ -116,3 +112,4 @@ class KeyValueStore:
                         del self.store[entry['key']]
         except FileNotFoundError:
             pass
+
