@@ -5,7 +5,7 @@ from key_value_store import KeyValueStore
 st.title("Key-Value Store Simulator")
 
 # Sidebar option to choose consistency
-consistency_mode = st.sidebar.selectbox("Choose Consistency", ["Strong", "Eventual"])
+consistency_mode = st.sidebar.selectbox("Choose Consistency", ["strong", "eventual"])
 
 # Slider for eventual consistency delay
 if consistency_mode == "eventual":
@@ -36,7 +36,7 @@ if ('kvStore' not in st.session_state
 
 kvStore = st.session_state['kvStore']
 
-#Put section 
+# Put section 
 st.header("Add or Update a Key")
 with st.form("put_form"):
     putKey = st.text_input("Key (Put)")
@@ -49,7 +49,7 @@ with st.form("put_form"):
         else:
             st.warning("Please enter both key and value.")
 
-#Get section 
+# Get section 
 st.header("Get a Value")
 with st.form("get_form"):
     getKey = st.text_input("Key (Get)")
@@ -64,7 +64,7 @@ with st.form("get_form"):
         else:
             st.warning("Please enter a key.")
 
-#Delete section
+# Delete section 
 st.header("Delete a Key")
 with st.form("delete_form"):
     delKey = st.text_input("Key (Delete)")
@@ -76,7 +76,7 @@ with st.form("delete_form"):
         else:
             st.warning("Please enter a key.")
 
-#Store display 
+# Store display 
 st.header("Current Store")
 
 storeTable = []
